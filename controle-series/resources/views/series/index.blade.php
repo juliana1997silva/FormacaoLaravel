@@ -1,5 +1,5 @@
 <x-layout title="Controle de Séries">
-    <a href="/series/criar" class="btn btn-success mb-5">Adicionar</a>
+    <a href="{{route('series.create')}} " class="btn btn-success mb-5">Adicionar</a>
 
     <ul class="list-group">
         @foreach ($series as $serie)
