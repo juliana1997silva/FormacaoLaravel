@@ -21,5 +21,5 @@ class LoginController extends Controller
     public function logout(){
         Auth::logout();
         return to_route("login.index");
-    }
+    } 
 }
