@@ -1,11 +1,5 @@
 <?php
 
-use App\Http\Controllers\EpisodesController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\SeasonsController;
-use App\Http\Controllers\SeriesController;
-use App\Http\Controllers\UsersController;
-use App\Http\Middleware\Autenticador;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,18 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {return redirect('/series');})->middleware(Autenticador::class);
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::resource('/series', SeriesController::class)->except(['show']);
-Route::get('/series/{series}/seasons', [SeasonsController::class, 'index'])->name('seasons.index');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get( '/season/{season}/episodes', [EpisodesController::class,'index'] )->name('episodes.index');
-Route::post( '/season/{season}/episodes', [EpisodesController::class,'update'] )->name('episodes.update');
-
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'login'])->name('login.index');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-
-Route::get('/registrar', [UsersController::class, 'create'])->name('users.create');
-Route::post('/registrar', [UsersController::class, 'store'])->name('users.store');
-
+require __DIR__ . '/auth.php';
