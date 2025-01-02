@@ -16,7 +16,7 @@ class SeriesController extends Controller
 
    public function index()
    {
-      $series = Series::all();
+      $series = Series::with('seasons.episodes')->get();
       return response()->json($series);
    }
 
@@ -26,9 +26,13 @@ class SeriesController extends Controller
       return response()->json($series, 201);
    }
 
-   public function show(Series $series)
+   public function show(int $series)
    {
-      return response()->json($series::with(['seasons.episodes'])->first());
+      $series = Series::with('seasons.episodes')->find($series);
+      if(is_null($series)){
+         return response()->json("Série não encontrada",404);
+      }
+      return response()->json($series);
    }
 
    public function update(Series $series, SeriesFormRequest $request){
