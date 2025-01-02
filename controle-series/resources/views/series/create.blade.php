@@ -1,5 +1,5 @@
 <x-layout title="Cadastro de  Série">
-    <form action="{{ route('series.store') }}" method="post">
+    <form action="{{ route('series.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row mb-3">
             <div class="mb-3 col-8">
@@ -13,6 +13,12 @@
              <div class="mb-3 col-2">
                 <label for="episodeQtd" class="form-label">Nº Episódio:</label>
                 <input type="text" name="episodeQtd" id="episodeQtd" class="form-control" value="{{ old('nome') }}">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="cover" class="form-label">Capa</label>
+                <input type="file" name="cover" id="cover" class="form-control" accept="image/png, image/jpeg">
             </div>
         </div>
 
