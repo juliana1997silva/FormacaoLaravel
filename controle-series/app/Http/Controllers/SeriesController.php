@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SeriesFormRequest;
 use App\Mail\SeriesCreated;
+use App\Models\Season;
 use App\Models\Series;
 use App\Repositories\SeriesRepository;
 use Illuminate\Http\Request;
@@ -33,12 +34,15 @@ class SeriesController extends Controller
 
     public function store(SeriesFormRequest $request)
     {
+        $request->coverPath = $request->file('cover')->store('series_cover','public');
         $serie = $this->repository->add($request);
+
         \App\Events\SeriesCreated::dispatch(
             $serie->nome, 
             $serie->id,
             $request->seasonQtd,
-            $request->episodeQtd
+            $request->episodeQtd,
+            $serie->cover,
 
         );
         

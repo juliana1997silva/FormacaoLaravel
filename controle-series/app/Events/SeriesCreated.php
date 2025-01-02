@@ -23,7 +23,8 @@ class SeriesCreated
         public readonly string $seriesNome,
         public readonly int $seriesId,
         public readonly int $seriesSeasonQtd,
-        public readonly int $seriesEpisodeQtd
+        public readonly int $seriesEpisodeQtd,
+        public readonly string $seriesCover,
     )
     {
         //
